@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load checkPlural %}
+
+{% block title %}
+Login
+{% endblock title %}
+
+{% block content %}
+ 
+<style>
+    .error-list{
+        color:red;
+    }
+</style>
+<div class="row">
+    <div class="col-md-6 "  style="margin:auto;">
+        <h1 >Login</h1>
+        <hr>
+        <form method='POST' novalidate>
+            {% csrf_token %}
+            {% for err in form.non_field_errors %}
+                <p>{{err}}</p>
+            {% endfor %}
+
+            {% for fm in form %}
+            <p>{{fm.label_tag}} {{fm}} {{fm.errors|striptags}}</p>
+            {% endfor %}
+            <input type="submit" value="Login">
+        </form>
+
+
+        <p class="mt-2">Create new account? <a href="{% url 'poll:register' %}">Register here</a></p>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Create
+{% endblock title %}
+
+{% block content %}
+<style>
+    label {
+        display: block;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-md-6" style="margin: auto;">
+        <h1>Add Poll Options</h1>
+        <hr>
+        <div style="margin-bottom: 15px;"><a href="{% url 'poll:home' %}" class="btn btn-primary"><i class="fa fa-home">Home</i></a></div>
+
+        <label style="margin-bottom: 5px;"><b>Question:</b></label>
+        <textarea readonly>{{q.question}}</textarea>
+        <br><br>
+        <label><b>Options:</b></label>
+        <div id="optionList-id">
+            {% for o in options %}
+            <span style="margin-right: 20px;">&#x2022; {{o.option}}</span>
+            {% endfor %}
+        </div>
+
+        <form method="POST" id="addOption-Form" data-qid="{{q.id}}" novalidate>
+            {% csrf_token %}
+            <p>{{ form.option.errors }}</p>
+            <label>{{ form.option.label_tag }}</label>
+            {{ form.option }}
+
+            <input type="submit" value="Add new option" class="btn btn-outline-success"  >
+        </form>
+
+        <div id="addMessage"></div>
+    </div>
+</div>
+{% endblock content %}

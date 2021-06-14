@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+<style>
+    table,
+    tr,
+    td,
+    th {
+        padding: 10px;
+        text-align: center;
+    }
+
+    a {
+        margin-right: 20px;
+    }
+
+    #poll-id {
+        margin-bottom: 10px;
+    }
+
+    .plus {
+        font-size: 30px;
+        font-weight: bold;
+    }
+    .plus > a{
+        text-decoration: none;
+    }
+    .plus > a:hover{
+        color:rgb(0, 0, 180);
+        font-weight: bold;
+    }
+
+    span>i {
+        cursor: pointer;
+    }
+</style>
+<h1>Poll Home</h1>
+<hr>
+<div id="poll-id"><a class="btn btn-outline-secondary" href="{% url 'poll:create' %}">Create Poll</a></div>
+<hr>
+<table class='table'>
+    <thead>
+        <tr>
+            <th>Poll Question</th>
+            <th>Created By</th>
+            <th>Add Option</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+        {% for q in questions %}
+        <tr>
+            <td>{{q.question}}</td>
+            <td>{{q.created_by}}</td>
+            <td class="plus"><a href="{% url 'poll:add_option' q.id  %}">+</a></td>
+            <td>
+                <a  class="btn btn-outline-success" href="{% url 'poll:vote_page' q.id %}">Vote</a>
+                <a class="btn btn-info" href="{% url 'poll:result' q.id %}">Result</a>
+
+            {% if request.user.is_authenticated %}
+                {% if request.user.username == q.created_by.username %}
+                    <button class="btn btn-danger btn-del"  data-pid="{{q.id}}"><i class="fa fa-trash"></i> Delete</button>
+                {% else %}
+                    <button class="btn btn-outline-danger btn-del"  onclick="alert('You don\'t have permission to delete this !!!')"><i class="fa fa-trash"></i> Delete</button>
+                {% endif %}
+            {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+
+<script>
+
+</script>
+{% endblock content %}
