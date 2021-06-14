@@ -1,10 +1,7 @@
 # Poll-App-Dynamic(AJAX)
 => This is my second project with django python. 
 
-=> The poll app is named dynamic cause we can add as many option for a poll as we wanted and each user can vote only once.
-
-=> While voting the page doesn't load as i have used ajax concept to do the job without loading the current page.
-
+=> The poll app is named dynamic cause we can add as many option and i've used ajax so in many places so that our page would not refresh.
 
 
 1) Poll Result 
