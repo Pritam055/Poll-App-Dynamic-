@@ -3,6 +3,8 @@
 
 => The poll app is named dynamic cause we can add as many option and i've used ajax so in many places so that our page would not refresh.
 
+=> Used chartjs to draw bar graph.
+
 
 1) Poll Result 
 ![result](https://user-images.githubusercontent.com/47033786/121837045-68f67180-ccf4-11eb-8760-302232051e4f.png)
